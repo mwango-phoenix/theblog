@@ -1,0 +1,8 @@
+{
+  "name": "Web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:mwango-phoenix/theblog.git",
+  "author": "Mick Wang <wang.mick12@gmail.com>",
+  "license": "MIT"
+}
