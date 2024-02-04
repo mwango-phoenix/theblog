@@ -1,6 +1,5 @@
 [build]
   base = "myblog"
-  publish = "myblog/build"
   functions = "my-blog-backend/src"
   command = "yarn run build"
 
