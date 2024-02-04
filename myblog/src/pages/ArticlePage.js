@@ -16,7 +16,7 @@ const ArticlePage = () => {
     };
 
     loadArticleInfo();
-  }, []);
+  }, [articleId]);
 
   const article = articles.find((article) => article.name === articleId);
 
