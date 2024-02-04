@@ -1,8 +1,21 @@
 import express from 'express';
+import path from 'path';
 import { db, connectToDb } from './db.js';
+import { fileURLToPath } from 'url';
+import 'dotenv/config';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../build')));
+
+//when browser sends request to server, that isn't an api route, server will send back index.html
+app.get(/^(?!\/api).+/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
+
 
 app.get('/api/articles/:name', async (req, res) => {
     const { name } = req.params;
@@ -47,9 +60,11 @@ app.post('/api/articles/:name/comments', async (req, res) => {
     }
 });
 
+const PORT = process.env.PORT || 8000;
+
 connectToDb(() => {
     console.log('Successfully connected to database!');
-    app.listen(8000, () => {
-        console.log('Server is listening on port 8000');
+    app.listen(PORT, () => {
+        console.log('Server is listening on port '+ PORT);
     });
 })
